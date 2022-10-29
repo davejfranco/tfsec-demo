@@ -1,0 +1,5 @@
+.terraform.lock.hcl
+.gitignore
+terraform.tfstate.backup
+.terraform/providers/registry.terraform.io/hashicorp/aws/4.22.0/linux_amd64/terraform-provider-aws_v4.22.0_x5
+.gitignore
