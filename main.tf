@@ -4,6 +4,14 @@ resource "aws_instance" "web" {
   count         = 2
   ami           = "ami-005e54dee72cc1d00"
   instance_type = "t3.micro"
+  
+  metadata_options {
+     http_tokens = "required"
+  } 
+
+  root_block_device {
+      encrypted = true
+  }
 
   tags = {
     Name        = "webserver-${count.index}"
@@ -14,6 +22,10 @@ resource "aws_instance" "web" {
 resource "aws_instance" "db" {
   ami           = "ami-005e54dee72cc1d00"
   instance_type = "t3.micro"
+
+  root_block_device {
+      encrypted = true
+  }
 
   tags = {
     Name        = "MysqlDB"
