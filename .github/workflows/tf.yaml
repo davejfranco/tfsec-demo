@@ -1,4 +1,4 @@
-name: 'Terraform GitHub Actions'
+name: 'Pull requests pre-checks'
 on:
   - pull_request
 jobs:
@@ -9,9 +9,5 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@master
 
-      - name: TFSec - Security Checks
-        uses: aquasecurity/tfsec-action@v1.0.0
-        with:
-          working_directory: .
 
 
