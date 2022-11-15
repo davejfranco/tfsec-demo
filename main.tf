@@ -1,17 +1,9 @@
 data "aws_region" "current" {}
 
 resource "aws_instance" "web" {
-  count         = 2
+
   ami           = "ami-005e54dee72cc1d00"
   instance_type = "t3.micro"
-  
-  metadata_options {
-     http_tokens = "required"
-  } 
-
-  root_block_device {
-      encrypted = true
-  }
 
   tags = {
     Name        = "webserver-${count.index}"
@@ -19,14 +11,9 @@ resource "aws_instance" "web" {
   }
 }
 
-#tfsec:ignore:aws-ec2-enforce-http-token-imds
 resource "aws_instance" "db" {
   ami           = "ami-005e54dee72cc1d00"
   instance_type = "t3.micro"
-
-  root_block_device {
-      encrypted = true
-  }
 
   tags = {
     Name        = "MysqlDB"
@@ -39,7 +26,7 @@ resource "aws_route53_zone" "primary" {
 }
 
 resource "aws_route53_record" "web" {
-  count   = 2
+
   zone_id = aws_route53_zone.primary.id
   name    = "webserver-${count.index}"
   type    = "A"
